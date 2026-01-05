@@ -1,0 +1,42 @@
+# Docker
+.git
+.gitignore
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+venv
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+htmlcov
+.pytest_cache
+.mypy_cache
+
+# Node
+webapp/frontend/node_modules
+webapp/frontend/.cache
+webapp/frontend/coverage
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Output files (we mount these as volumes)
+adminlte/aws
+output
+__fork
+*.zip
+
+# Docs
+*.md
+!README.md
+docs

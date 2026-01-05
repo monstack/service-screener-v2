@@ -342,12 +342,12 @@ for acctId, cred in rolesCred.items():
     src = _C.FORK_DIR + '/error.txt'
     if os.path.exists(src):
         dest = ACCTDIR + '/error.txt'
-        os.rename(src, dest)
+        shutil.move(src, dest)
         
     src = _C.FORK_DIR + '/all.csv'
     if os.path.exists(src):
         dest = ACCTDIR + '/all.csv'
-        os.rename(src, dest)
+        shutil.move(src, dest)
     
 
 adminlteDir = _C.ADMINLTE_ROOT_DIR

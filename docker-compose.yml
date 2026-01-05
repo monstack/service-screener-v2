@@ -1,0 +1,35 @@
+# AWS Service Screener Web GUI - Docker Compose
+# Run with: docker-compose up --build
+
+version: '3.8'
+
+services:
+  screener-webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aws-service-screener
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount AWS credentials (read-only for security)
+      - ~/.aws:/root/.aws:ro
+      # Mount SSO cache for SSO/Identity Center users
+      - ~/.aws/sso:/root/.aws/sso:ro
+      # Persist generated reports
+      - ./adminlte:/app/adminlte
+      # Fork directory (temp files) - must be same filesystem as adminlte for os.rename
+      - ./__fork:/app/__fork
+      # Persist output files
+      - ./output:/app/output
+    environment:
+      - AWS_DEFAULT_REGION=ap-southeast-1
+      # Optional: uncomment to use specific profile
+      # - AWS_PROFILE=default
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/api/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
